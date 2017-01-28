@@ -52,8 +52,8 @@ type DurationsData struct {
 type Durations struct {
 	Branches []string
 	Data     []DurationsData
-	End      Time
-	Start    Time
+	End      time.Time
+	Start    time.Time
 	TimeZone string
 }
 
@@ -86,8 +86,8 @@ type HeartbeatItem struct {
 // Heartbeats contains the Heartbeats report
 type Heartbeats struct {
 	Data     []HeartbeatItem
-	Start    Time
-	End      Time
+	Start    time.Time
+	End      time.Time
 	Timezone string
 }
 
@@ -166,8 +166,8 @@ type SummaryProject SummaryItem
 type SummaryRange struct {
 	Date      string
 	DateHuman string `json:"date_human"`
-	End       Time
-	Start     Time
+	End       time.Time
+	Start     time.Time
 	Text      string
 	Timezone  string
 }
@@ -185,8 +185,8 @@ type SummariesData struct {
 // Summaries contains the whole summaries report
 type Summaries struct {
 	Data  []SummariesData
-	End   Time
-	Start Time
+	End   time.Time
+	Start time.Time
 }
 
 // UserData contains the data for the user report

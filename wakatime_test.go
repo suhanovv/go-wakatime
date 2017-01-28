@@ -95,15 +95,15 @@ const (
       "range": {
         "date": "04\/23\/2015",
         "date_human": "04\/23\/2015",
-        "end": 1429826399,
-        "start": 1429740000,
+        "end": "2015-06-01T22:00:32Z",
+  	"start": "2015-06-02T22:00:32Z",
         "text": "04\/23\/2015",
         "timezone": "Europe\/Stockholm"
       }
     }
   ],
-  "end": 1429912799,
-  "start": 1429740000
+  "end": "2015-06-01T22:00:32Z",
+  "start": "2015-06-02T22:00:32Z"
 }`
 	durations = `{
   "branches": [
@@ -116,8 +116,8 @@ const (
       "time": 1430021746.422815
     }
   ],
-  "end": 1430085599,
-  "start": 1429999200,
+  "end": "2015-06-01T22:00:32Z",
+  "start": "2015-06-02T22:00:32Z",
   "timezone": "Europe/Stockholm"
 }`
 	stats = `{
@@ -206,8 +206,8 @@ const (
       "type": "file"
     }
   ],
-  "end": 1433282399,
-  "start": 1433196000,
+  "end": "2015-06-01T22:00:32Z",
+  "start": "2015-06-02T22:00:32Z",
   "timezone": "Europe/Stockholm"
 }`
 )
@@ -270,8 +270,8 @@ func TestWakatime(t *testing.T) {
 				s, err := wt.Summaries(CurrentUser, time.Now(), time.Now(), nil, nil)
 				So(err, ShouldBeNil)
 				So(s, ShouldNotBeNil)
-				So(s.End.Time().Unix(), ShouldEqual, 1429912832)
-				So(s.Start.Time().Unix(), ShouldEqual, 1429740032)
+				So(s.End.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-01T22:00:32Z")
+				So(s.Start.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-02T22:00:32Z")
 				So(len(s.Data), ShouldEqual, 1)
 				sday := s.Data[0]
 
@@ -328,8 +328,8 @@ func TestWakatime(t *testing.T) {
 				// Range
 				So(sday.Range.Date, ShouldEqual, "04/23/2015")
 				So(sday.Range.DateHuman, ShouldEqual, "04/23/2015")
-				So(sday.Range.End.Time().Unix(), ShouldEqual, 1429826432)
-				So(sday.Range.Start.Time().Unix(), ShouldEqual, 1429740032)
+				So(sday.Range.End.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-01T22:00:32Z")
+				So(sday.Range.Start.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-02T22:00:32Z")
 				So(sday.Range.Text, ShouldEqual, "04/23/2015")
 				So(sday.Range.Timezone, ShouldEqual, "Europe/Stockholm")
 			})
@@ -350,8 +350,8 @@ func TestWakatime(t *testing.T) {
 				So(d.Data[0].Duration, ShouldEqual, 2240.0)
 				So(d.Data[0].Project, ShouldEqual, "go-wakatime")
 				So(d.Data[0].Time.Time().UnixNano(), ShouldEqual, 1430021760000000000)
-				So(d.End.Time().Unix(), ShouldEqual, 1430085632)
-				So(d.Start.Time().Unix(), ShouldEqual, 1429999232)
+				So(d.End.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-01T22:00:32Z")
+				So(d.Start.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-02T22:00:32Z")
 			})
 		})
 	})
@@ -432,8 +432,8 @@ func TestWakatime(t *testing.T) {
 				So(err, ShouldBeNil)
 				So(h, ShouldNotBeNil)
 				So(len(h.Data), ShouldEqual, 2)
-				So(h.End.Time().UTC().Format(time.RFC3339), ShouldEqual, "2015-06-02T22:00:32Z")
-				So(h.Start.Time().UTC().Format(time.RFC3339), ShouldEqual, "2015-06-01T22:00:32Z")
+				So(h.End.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-01T22:00:32Z")
+				So(h.Start.UTC().Format(time.RFC3339), ShouldEqual, "2015-06-02T22:00:32Z")
 			})
 		})
 	})
